@@ -43,11 +43,13 @@ inputs:
 
   resource_group_name:
     type: string
-    default: { concat: [ 'aks-test-rg', { get_input: resource_suffix } ] }
+    required: true
+    default: 'RG-AKS'
 
   managed_cluster_name:
     type: string
-    default: { concat: [ 'aks-test-mc', { get_input: resource_suffix } ] }
+    required: true
+    default: cloudify-aks
 
   service_account_name:
     type: string
@@ -107,12 +109,12 @@ dsl_definitions:
 
 node_templates:
 
-  resource_group:
-    type: cloudify.azure.nodes.ResourceGroup
-    properties:
-      name: { get_input: resource_group_name }
-      location: { get_input: location }
-      azure_config: *azure_config
+#   resource_group:
+#     type: cloudify.azure.nodes.ResourceGroup
+#     properties:
+#       name: { get_input: resource_group_name }
+#       location: { get_input: location }
+#       azure_config: *azure_config
 
   managed_cluster:
     type: cloudify.azure.nodes.compute.ManagedCluster
